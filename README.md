@@ -1,2 +1,29 @@
 # imagecolouriser
 Machine learning algorithm to convert images from greyscale to colour
+
+# How to use:
+
+To use timepiece all you need to do is click the browse files button and select the file you want to colourise
+Then as if like magic it will attempt to add colour to it
+Then click the save as button to move it any where on your system
+
+# FAQ's
+
+Why does my colourised image have a blue hue?
+
+That is an error with the current alpha release and should be solved by the next update.
+
+It didn’t colourise accurately what can I do?
+
+If you re-enter the image the algorithm will attempt again and hopefully be more accurate.
+
+How does it work?
+
+We trained a machine learning library called openCV on black and white versions of colour images
+Tasking it to attempt to add colour in the black and white version to match the original
+Repeat this step several thousand time and eventually it can do it without the guide.
+
+When is the next update being released?
+
+Hopefully sometime in early June.
+Hopfully fixing our blue hue problem and giving the you more control over what the image looks like
