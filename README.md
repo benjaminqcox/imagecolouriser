@@ -17,6 +17,11 @@ It didn’t colourise accurately what can I do?
 
 If you re-enter the image the algorithm will attempt again and hopefully be more accurate.
 
+Is there any way to report bugs?
+
+Yes, click here [here](https://github.com/benjaminqcox/imagecolouriser/issues/new) or contact the team directly at timepieceteam@gmail.com
+
+
 How does it work?
 
 We trained a machine learning library called openCV on black and white versions of colour images
