@@ -3,7 +3,8 @@ Machine learning algorithm to convert images from greyscale to colour
 
 # How to use:
 
-To use timepiece all you need to do is click the browse files button and select the file you want to colourise
+To use timepiece run the color.py file
+All you need to do is click the browse files button and select the file you want to colourise
 Then as if like magic it will attempt to add colour to it
 Then click the save as button to move it any where on your system
 
@@ -19,7 +20,7 @@ If you re-enter the image the algorithm will attempt again and hopefully be more
 
 Is there any way to report bugs?
 
-Yes, click here [here](https://github.com/benjaminqcox/imagecolouriser/issues/new) or contact the team directly at timepieceteam@gmail.com
+Yes, click [here](https://github.com/benjaminqcox/imagecolouriser/issues/new) or contact the team directly at timepieceteam@gmail.com
 
 
 How does it work?
