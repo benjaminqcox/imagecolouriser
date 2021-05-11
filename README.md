@@ -1,4 +1,4 @@
-# imagecolouriser
+# Timepiece
 Machine learning algorithm to convert images from greyscale to colour
 
 # How to use:
