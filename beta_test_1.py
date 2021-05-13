@@ -86,7 +86,7 @@ def ReduceSize(Preview):
 def Neural_Network_attempt(filepath):
     
     #Loads saved model
-    model = load_model("model_2.h5")
+    model = load_model("model.h5")
     
     #Loads the image
     image = cv2.imread(filepath)
