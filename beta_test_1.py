@@ -8,6 +8,7 @@ from tkinter import *
 from tkinter import filedialog
 from PIL import Image, ImageTk
 import os
+import webbrowser
 
 def browseFiles():
     global img
@@ -39,6 +40,10 @@ def RunAI():
     PostImg = Image.fromarray(NewImage)
     RefPostImg = ImageTk.PhotoImage(PostImg)
     After_Image.configure(image = RefPostImg)
+
+def OpenBugReport():
+
+    webbrowser.open("https://github.com/benjaminqcox/imagecolouriser/issues/new%22",new=1)
     
         
             
@@ -81,19 +86,20 @@ def ReduceSize(Preview):
 def Neural_Network_attempt(filepath):
     
     #Loads saved model
-    model = load_model("model.h5")
+    model = load_model("model_2.h5")
     
     #Loads the image
     image = cv2.imread(filepath)
     image = cv2.resize(image, (256, 256))
-    image = cv2.normalize(image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
-    
+    #image = cv2.normalize(image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
     #Converts the loaded image from rgb to lab
-    lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
+    mono = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    
+    # cv2.imwrite('cv_mono_start.png', mono) 
     
     # image sorting out -------------------------------------------------------------------
     
-    input_data = lab[:,:,0]
+    input_data = mono
   
     
     input_data = input_data.reshape((1,256,256,1))
@@ -107,9 +113,13 @@ def Neural_Network_attempt(filepath):
     image_base[:,:,0] = input_data[0][:,:,0]
     image_base[:,:,1:] = output_data[0]
     
+    
     image_base = cv2.normalize(image_base, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+    #cv2.imwrite('cv_LAB_end.png', image_base)
     
     rgb = cv2.cvtColor(image_base, cv2.COLOR_LAB2RGB)
+    #rgb = cv2.cvtColor(rgb, cv2.COLOR_BGR2RGB)
+    #cv2.imwrite('cv_RGB_end.png', rgb)
     #rgb = image_base
     return rgb
 
@@ -121,7 +131,10 @@ SaveFilePath =  os.path.dirname(os.path.realpath(__file__))
 button_explore = Button(root, text = "Browse Files", command = browseFiles)
 button_save = Button(root, text = "Save File", command = SaveFile)
 button_run = Button(root, text = "Colourize", command = RunAI)
-##button_report = Button(root, text = "Report Bug", command = SaveFile)
+button_report = Button(root, text = "Report Bug", command = OpenBugReport)
+
+
+
 
 Preview_Image = Button(root, command = lambda: fullScreen(True))
 Preview_filename = "timepiece.png"
@@ -146,6 +159,7 @@ After_Image.configure(image = RefPostImg)
 button_explore.grid(column = 1, row = 1)
 button_save.grid(column = 2, row = 1)
 button_run.grid(column = 3, row = 1)
+button_report.grid(column = 4, row = 1)
 Preview_Image.grid(column = 1, row = 2, columnspan = 4)
 After_Image.grid(column = 1, row = 3, columnspan = 4)
 
