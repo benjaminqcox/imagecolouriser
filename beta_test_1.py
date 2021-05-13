@@ -15,35 +15,35 @@ def browseFiles():
     global RefImg
     global Preview_filename
     
-    Preview_filename = filedialog.askopenfilename(initialdir = '//', title = "Select a File", filetypes = (("Image files", ".png .jpeg .jpg"), ("all files", "*.*")))
+    Preview_filename = filedialog.askopenfilename(initialdir = '//', title = "Select a File", filetypes = (("Image files", ".png .jpeg .jpg"), ("all files", "*.*")))# opens file dialog box
 
     if(Preview_filename != ""):
-        button_explore.configure(text=Preview_filename)
-        img = Image.open(Preview_filename)
-        img.thumbnail(size)
+        button_explore.configure(text=Preview_filename)#updates the buttons text
+        img = Image.open(Preview_filename)#opens new image in a pillow format
+        img.thumbnail(size)# resizes image
         RefImg = ImageTk.PhotoImage(img)
-        Preview_Image.configure(image=RefImg)
+        Preview_Image.configure(image=RefImg)#sets the image to the button
     
-    print(Preview_filename)
+    
 def SaveFile():
     
-    SaveFile = filedialog.asksaveasfilename(initialdir = "/", title = "Select file", defaultextension = ".png", filetypes = [('JPEG', ('*.jpg','*.jpeg','*.jpe','*.jfif')),('PNG', '*.png')])
-    if SaveFilePath is None:
+    SaveFile = filedialog.asksaveasfilename(initialdir = "/", title = "Select file", defaultextension = ".png", filetypes = [('JPEG', ('*.jpg','*.jpeg','*.jpe','*.jfif')),('PNG', '*.png')])# opens a save file dialog
+    if SaveFilePath is None:#ensures there is a path
         return
-    PostImg.save(SaveFile)
+    PostImg.save(SaveFile)#saves file
 
 def RunAI():
     global PostImg
     global RefPostImg
     
-    NewImage = Neural_Network_attempt(Preview_filename)
-    PostImg = Image.fromarray(NewImage)
+    NewImage = Neural_Network_attempt(Preview_filename)#runs the AI
+    PostImg = Image.fromarray(NewImage)# converts array from the AI to an image
     RefPostImg = ImageTk.PhotoImage(PostImg)
     After_Image.configure(image = RefPostImg)
 
 def OpenBugReport():
 
-    webbrowser.open("https://github.com/benjaminqcox/imagecolouriser/issues/new%22",new=1)
+    webbrowser.open("https://github.com/benjaminqcox/imagecolouriser/issues/new%22",new=1)#opens the issues page on the github
     
         
             
@@ -52,11 +52,11 @@ def fullScreen(Preview):
     global RefPostImg
     
     if(Preview == True):
-        img = Image.open(Preview_filename)
-        img.thumbnail(fullscreen)
+        img = Image.open(Preview_filename)# reopens image in pillow format
+        img.thumbnail(fullscreen)#resizes image
         RefImg = ImageTk.PhotoImage(img)
-        Preview_Image.configure(image=RefImg, command = lambda: ReduceSize(True))
-        After_Image.grid_forget()
+        Preview_Image.configure(image=RefImg, command = lambda: ReduceSize(True))#reconfigures the images button so the button reduces the size of the image on next click
+        After_Image.grid_forget()#hides the other button
     else:
         PostImg = Image.open(After_filename)
         PostImg.thumbnail(fullscreen)
@@ -73,8 +73,8 @@ def ReduceSize(Preview):
         img = Image.open(Preview_filename)
         img.thumbnail(size)
         RefImg = ImageTk.PhotoImage(img)
-        Preview_Image.configure(image=RefImg, command = lambda: fullScreen(True))
-        After_Image.grid(column = 1, row = 3, columnspan = 4)
+        Preview_Image.configure(image=RefImg, command = lambda: fullScreen(True))#reconfigures the images button so the button increases the size of the image on next click
+        After_Image.grid(column = 1, row = 3, columnspan = 4)#reinstates the button for the user
     else:
         PostImg = Image.open(After_filename)
         PostImg.thumbnail(size)
@@ -128,7 +128,7 @@ root = Tk()
 
 SaveFilePath =  os.path.dirname(os.path.realpath(__file__))
 
-button_explore = Button(root, text = "Browse Files", command = browseFiles)
+button_explore = Button(root, text = "Browse Files", command = browseFiles)#inital declaration of the buttons
 button_save = Button(root, text = "Save File", command = SaveFile)
 button_run = Button(root, text = "Colourize", command = RunAI)
 button_report = Button(root, text = "Report Bug", command = OpenBugReport)
@@ -137,16 +137,16 @@ button_report = Button(root, text = "Report Bug", command = OpenBugReport)
 
 
 Preview_Image = Button(root, command = lambda: fullScreen(True))
-Preview_filename = "timepiece.png"
+Preview_filename = "timepiece.png"#initial image in the previews
 
 After_Image = Button(root, command = lambda: fullScreen(False))
 After_filename = "timepiece.png"
 
-size = 640,360
+size = 640,360#default sizes of the images
 fullscreen = 1280,720
 
 
-img = Image.open(Preview_filename)
+img = Image.open(Preview_filename)#opening initial images
 img.thumbnail(size)
 RefImg = ImageTk.PhotoImage(img)
 Preview_Image.configure(image=RefImg)
@@ -156,12 +156,12 @@ PostImg.thumbnail(size)
 RefPostImg = ImageTk.PhotoImage(PostImg)
 After_Image.configure(image = RefPostImg)
 
-button_explore.grid(column = 1, row = 1)
+button_explore.grid(column = 1, row = 1)#setting positioning of all the buttons
 button_save.grid(column = 2, row = 1)
 button_run.grid(column = 3, row = 1)
 button_report.grid(column = 4, row = 1)
 Preview_Image.grid(column = 1, row = 2, columnspan = 4)
 After_Image.grid(column = 1, row = 3, columnspan = 4)
 
-root.mainloop()
+root.mainloop()#close of root
 
