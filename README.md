@@ -5,7 +5,7 @@ Machine learning algorithm to convert images from greyscale to colour
 
 To use timepiece run the color.py file
 All you need to do is click the browse files button and select the file you want to colourise
-Then as if like magic it will attempt to add colour to it
+Then click the colourise button and as if like magic it will attempt to add colour to it
 Then click the save as button to move it any where on your system
 
 # FAQ's
